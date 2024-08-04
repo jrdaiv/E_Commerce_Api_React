@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'http://localhost:5173/',
+  baseURL: 'http://127.0.0.1:5000',
 });
 
 const handleResponse = (response) => response.data;
@@ -29,5 +29,6 @@ export const getOrder = (id) => api.get(`/orders/${id}`).then(handleResponse).ca
 export const getOrderStatus = (id) => api.get(`/orders/${id}/status`).then(handleResponse).catch(handleError);
 export const getOrdersByCustomer = (customerId) => api.get(`/customers/${customerId}/orders`).then(handleResponse).catch(handleError);
 export const cancelOrder = (id) => api.delete(`/orders/${id}`).then(handleResponse).catch(handleError);
-
+export const getOrders = () => api.get('/orders').then(handleResponse).catch(handleError);
+export const updateOrder = (id, order) => api.put(`/orders/${id}`, order).then(handleResponse).catch(handleError);
 export default api;

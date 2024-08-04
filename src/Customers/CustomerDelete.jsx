@@ -1,26 +1,75 @@
-import React from 'react';
-import { Button } from 'react-bootstrap';
+import React, { useState, useEffect } from 'react';
+import { Button, Form, Table} from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
-import { deleteCustomer } from '../Services/Api';
+import { deleteCustomer, getCustomer } from '../Services/Api';
 
 
 const CustomerDelete = () => {
     const {id} = useParams();
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [phone, setPhone] = useState('');
+    const [error, setError] = useState(null);
+    const [loading, setLoading] = useState(false);
 
-    const handleDelete = async () => {
+    useEffect(() => {
+        const fetchCustomer = async () => {
+            try {
+                const customer = await getCustomer(id);
+                const {name, email, phone} = customer;
+                setName(name);
+                setEmail(email);
+                setPhone(phone);
+            } catch (error) {
+                setError(error.message);
+            }finally{
+                setLoading(false);
+            }
+        }
+        fetchCustomer();
+    }, [id])
+
+
+
+    const handleDelete = async (e) => {
+        e.preventDefault();
+        setLoading(true)
         try {
             await deleteCustomer(id);
             alert('Customer deleted successfully');
         } catch (error) {
-            alert('Error deleting customer:', error);
+            setError(error.message);
+        }finally{
+            setLoading(false);
         }
     }
+    if (loading) return <p>Loading...</p>;
+    if (error) return <p>Error: {error}</p>;
+
+
 
     return (
         <div>
-            <h1>Delete Customer</h1>
-            <p>Are you sure you want to delete this customer?</p>
-            <Button variant="danger" onClick={handleDelete}>Delete</Button>
+            <h1>Customers Details</h1>
+            <Table striped bordered hover>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{name}</td>
+                        <td>{email}</td>
+                        <td>{phone}</td>
+                        <Button variant="danger" onClick={handleDelete} disabled={loading}>Delete</Button>
+                    </tr>
+                </tbody>
+            </Table>
+            
         </div>
     )
 }

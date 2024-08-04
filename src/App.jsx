@@ -1,20 +1,22 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import { Container, Navbar, Nav } from 'react-bootstrap';
 import Customers from './Customers/Customers';
 import Products from './Products/Products';
 import Orders from './Orders/Orders';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './Styles/Styles.css'
 
 const App = () => {
   return (
     <Router>
       <Navbar bg="dark" variant="dark" expand="lg">
-        <Container>
-          <Navbar.Brand href="/">E-Commerce API</Navbar.Brand>
+      <Container>
+          <Navbar.Brand href="/customers">E-Commerce API</Navbar.Brand>
           <Nav className="mr-auto">
-            <Nav.Link href="/customers">Customers</Nav.Link>
-            <Nav.Link href="/products">Products</Nav.Link>
-            <Nav.Link href="/orders">Orders</Nav.Link>
+            <Nav.Link as={Link} to="/customers">Customers</Nav.Link>
+            <Nav.Link as={Link} to="/products">Products</Nav.Link>
+            <Nav.Link as={Link} to="/orders">Orders</Nav.Link>
           </Nav>
         </Container>
       </Navbar>

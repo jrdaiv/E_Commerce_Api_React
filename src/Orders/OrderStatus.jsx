@@ -5,27 +5,34 @@ import {getOrderStatus} from '../Services/Api/'
 
 const OrderStatus = () => {
     const {id} = useParams();
-    const [status, setStatus] = useState('');
+    const [orderStatus, setOrderStatus] = useState('');
+    const [error, setError] = useState('');
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const fetchOrderStatus = async () => {
             try{
                 const response = await getOrderStatus(id);
-                setOrderStatus(response.data);
+                setOrderStatus(response);
             }catch(error){
-                alert('Error fetching order status:', error);
+                setError(error.message);
+            }finally{
+                setLoading(false);
             }
         }
         fetchOrderStatus();
     }, [id])
+
+    if(loading) return <p>Loading...</p>;
+    if(error) return <p>Error: {error}</p>;
     
     return(
         <div>
             {orderStatus && (
                 <div>
                     <h2>Order Status</h2>
-                    <p>Order ID: {orderStatus.id}</p>
-                    <p>Status: {orderStatus.status}</p>
+                    <p>Order ID: {OrderStatus.id}</p>
+                    <p>Status: {OrderStatus.status}</p>
                 </div>
             )}
         </div>

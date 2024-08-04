@@ -1,22 +1,32 @@
 import React from 'react';
-import ProductForm from './ProductForm.jsx';
-import ProductDetails from './productDetails.jsx';
-import ProductUpdateForm from './ProductUpdateForm.jsx';
-import ProductDelete from './ProductDelete.jsx';
-import ProductList from './ProductList.jsx';
+import ProductForm from './ProductForm';
+import ProductDetails from './ProductDetails';
+import ProductUpdateForm from './ProductUpdateForm';
+import ProductDelete from './ProductDelete';
+import ProductList from './ProductList';
 import { Container, Row, Col } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import '../Styles/Styles.css'
+
 
 const Products = () => {
+  console.log('Products component rendered');
   return (
     <Container>
       <Row>
-        <Col><ProductForm /></Col>
-        <Col><ProductDetails /></Col>
-        <Col><ProductUpdateForm /></Col>
-        <Col><ProductDelete /></Col>
+        <Col className='cust'><ProductForm /></Col>
       </Row>
       <Row>
-        <Col><ProductList /></Col>
+        {/* <Col className='cust'><ProductDetails /></Col> */}
+      </Row>
+      <Row>
+        <Col className='cust'><ProductUpdateForm /></Col>
+      </Row>
+      <Row>
+        {/* <Col className='cust'><ProductDelete /></Col> */}
+      </Row>
+      <Row>
+        <Col className='cust'><ProductList /></Col>
       </Row>
     </Container>
   );

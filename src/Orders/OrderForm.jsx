@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {form, Button} from 'react-bootstrap';
+import {Form, Button} from 'react-bootstrap';
 import {createOrder, getCustomers, getProducts} from '../Services/Api/'
 
 const OrderForm = () => {
@@ -8,6 +8,8 @@ const OrderForm = () => {
     const [customerId, setCustomerId] = useState('');
     const [productId, setProductId] = useState('');
     const [orderDate, setOrderDate] = useState('');
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
 
     useEffect(() => {
         const fetchCustomersAndProducts = async () => {
@@ -17,7 +19,7 @@ const OrderForm = () => {
                 setCustomer(customersData);
                 setProducts(productsData);
             } catch (error) {
-                console.error('Error fetching customers and products:', error);
+                setError(error.message);
             }
             
         }
@@ -27,46 +29,71 @@ const OrderForm = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setLoading(true);
         try{
             await createOrder({customerId, productId, orderDate});
             alert('Order created successfully');
+            setCustomerId('');
+            setProductId('');
+            setOrderDate('');
         }catch(error){
-            alert('Error creating order:', error);
-        };
+            setError(error.message);
+        }finally{
+            setLoading(false);
+        }
     };
 
     return (
-        <form onSubmit={handleSubmit}>
-            <form.Group controlId="customerId">
-                <form.Label>Customer</form.Label>
-                <form.Control as="select" value={customerId} onChange={(e) => setCustomerId(e.target.value)}>
-                    <option value="">Select a customer</option>
-                    {customers.map((customer) => (
-                        <option key={customer.id} value={customer.id}>{customer.name}</option>
-                    ))}
-                </form.Control>
-            </form.Group>
+      <>
+        {error && <p>{error}</p>}
+        <Form onSubmit={handleSubmit}>
+          <Form.Group controlId="customerId">
+            <Form.Label>Customer</Form.Label>
+            <Form.Control
+              as="select"
+              value={customerId}
+              onChange={(e) => setCustomerId(e.target.value)}
+            >
+              <option value="">Select a customer</option>
+              {customers.map((customer) => (
+                <option key={customer.id} value={customer.id}>
+                  {customer.name}
+                </option>
+              ))}
+            </Form.Control>
+          </Form.Group>
 
-            <form.Group controlId="productId">
-                <form.Label>Product</form.Label>
-                <form.Control as="select" value={productId} onChange={(e) => setProductId(e.target.value)}>
-                    <option value="">Select a product</option>
-                    {products.map((product) => (
-                        <option key={product.id} value={product.id}>{product.name}</option>
-                    ))}
-                </form.Control>
-            </form.Group>
+          <Form.Group controlId="productId">
+            <Form.Label>Product</Form.Label>
+            <Form.Control
+              as="select"
+              value={productId}
+              onChange={(e) => setProductId(e.target.value)}
+            >
+              <option value="">Select a product</option>
+              {products.map((product) => (
+                <option key={product.id} value={product.id}>
+                  {product.name}
+                </option>
+              ))}
+            </Form.Control>
+          </Form.Group>
 
-            <form.Group controlId="orderDate">
-                <form.Label>Order Date</form.Label>
-                <form.Control type="date" value={orderDate} onChange={(e) => setOrderDate(e.target.value)} />
-            </form.Group>
+          <Form.Group controlId="orderDate">
+            <Form.Label>Order Date</Form.Label>
+            <Form.Control
+              type="date"
+              value={orderDate}
+              onChange={(e) => setOrderDate(e.target.value)}
+            />
+          </Form.Group>
 
-            <Button variant="primary" type="submit">
-                Create Order
-            </Button>
-        </form>
-    )
+          <Button variant="warning" type="submit" disabled={loading}>
+            {loading ? 'Creating Order...' : 'Create Order'}
+          </Button>
+        </Form>
+      </>
+    );
     
 
 

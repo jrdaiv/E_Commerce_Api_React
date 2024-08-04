@@ -1,11 +1,16 @@
 import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
-import { createProduct } from '../services/api/';
+import { createProduct } from '../Services/Api/';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 
 const ProductForm = () => {
     const [name, setName] = useState('');
     const [price, setPrice] = useState('');
+    console.log('ProductForm component rendered');
+    const [error, setError] = useState(null);
+    const [loading, setLoading] = useState(false);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -29,8 +34,8 @@ const ProductForm = () => {
                 <Form.Control type="number" placeholder="Enter product price" value={price} onChange={(e) => setPrice(e.target.value)} />
             </Form.Group>
 
-            <Button variant="primary" type="submit">
-                Submit
+            <Button variant="warning" type="submit">
+                Create Product
             </Button>
         </Form>
     );

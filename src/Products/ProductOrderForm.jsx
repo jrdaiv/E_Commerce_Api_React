@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
-import {getProduct, updateProduct} from '../services/api/'
+import {getProduct, updateProduct} from '../Services/Api/'
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 
 const ProductUpdateForm = () => {
@@ -35,7 +37,7 @@ const ProductUpdateForm = () => {
     };
 
     return(
-        <form onSubmit={handleSubmit}>
+        <Form onSubmit={handleSubmit}>
             <Form.Group controlId="formProductName">
                 <Form.Label>Product Name</Form.Label>
                 <Form.Control type="text" placeholder="Enter product name" 
@@ -51,7 +53,7 @@ const ProductUpdateForm = () => {
             <Button variant="primary" type="submit">
                 Update Product
             </Button>
-        </form>
+        </Form>
     )
 
 

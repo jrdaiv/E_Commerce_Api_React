@@ -1,42 +1,57 @@
 import React, {useState} from 'react';
-import {form, Button} from 'react-bootstrap';
+import { Form, Button } from 'react-bootstrap';
 import {createCustomer} from '../Services/Api/';
+// import '../Styles/Styles.css'
 
 
 const CustomerForm = () => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setLoading(true);
         try{
             await createCustomer({name, email, phone});
             alert('Customer created successfully');
+            setName('');
+            setEmail('');
+            setPhone('');
         }catch (error){
-            alert(error.message);
-
-        }
+            setError(error.message);
+        }finally {
+            setLoading(false);}
     }
 
     return(
-        <form onSubmit={handleSubmit}>
-            <form.Group controlId="formName">
-                <form.Label>Name</form.Label>
-                <form.Control type="text" placeholder="Enter name" value={name} onChange={(e) => setName(e.target.value)} />
-            </form.Group>
-            <form.Group controlId="formEmail">
-                <form.Label>Email</form.Label>
-                <form.Control type="email" placeholder="Enter email" value={email} onChange={(e) => setEmail(e.target.value)} />
-            </form.Group>
-            <form.Group controlId="formPhone">
-                <form.Label>Phone</form.Label>
-                <form.Control type="text" placeholder="Enter phone" value={phone} onChange={(e) => setPhone(e.target.value)} />
-            </form.Group>
-            <Button variant="primary" type="submit">
-                Submit
+        <>
+        <div className="customer-form-container">
+        {error && <p>{error.message}</p>}
+        <Form onSubmit={handleSubmit}>
+            <Form.Group controlId="formName">
+                <Form.Label>Name</Form.Label>
+                <Form.Control type="text" placeholder="Enter name" 
+                value={name} onChange={(e) => setName(e.target.value)} />
+            </Form.Group>
+            <Form.Group controlId="formEmail">
+                <Form.Label>Email</Form.Label>
+                <Form.Control type="email" placeholder="Enter email" 
+                value={email} onChange={(e) => setEmail(e.target.value)} />
+            </Form.Group>
+            <Form.Group controlId="formPhone">
+                <Form.Label>Phone</Form.Label>
+                <Form.Control type="text" placeholder="Enter phone" 
+                value={phone} onChange={(e) => setPhone(e.target.value)} />
+            </Form.Group>
+            <Button variant="primary" type="submit" disabled={loading}>
+                {loading ? 'Creating...' : 'Create Customer'}
             </Button>
-        </form>
+        </Form>
+        </div>
+        </>
     );
     
 }

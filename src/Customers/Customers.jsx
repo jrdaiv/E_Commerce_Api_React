@@ -1,24 +1,23 @@
 import React from 'react';
-import CustomerForm from './CustomerForm.jsx';
-import CustomerDetails from './CustomerDetails.jsx';
-import CustomerUpdateForm from './CustomerUpdateForm.jsx';
-import CustomerDelete from './CustomerDelete.jsx';
+import CustomerForm from './CustomerForm';
+import CustomerDetails from './CustomerDetails';
+import CustomerUpdateForm from './CustomerUpdateForm';
+import CustomerDelete from './CustomerDelete';
 import { Container, Row, Col } from 'react-bootstrap';
+import '../Styles/Styles.css'
+
 
 const Customers = () => {
   return (
-    <Container>
+    <Container className=''>
       <Row>
-        <Col><CustomerForm /></Col>
+        <Col className='cust'><CustomerForm /></Col>
       </Row>
       <Row>
-        <Col><CustomerDetails /></Col>
+        <Col className='cust'><CustomerUpdateForm /></Col>
       </Row>
       <Row>
-        <Col><CustomerUpdateForm /></Col>
-      </Row>
-      <Row>
-        <Col><CustomerDelete /></Col>
+        <Col className='cust'><CustomerDelete /></Col>
       </Row>
     </Container>
   );
