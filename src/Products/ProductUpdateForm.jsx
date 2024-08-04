@@ -43,14 +43,15 @@ const ProductUpdateForm = () => {
 
   return (
     <Form onSubmit={handleSubmit}>
+        <h2 className='text-white'>Update Customers</h2>
         <Form.Group controlId="formProductName">
             <Form.Label>Product Name</Form.Label>
-            <Form.Control type="text" placeholder="Enter product name" value={name} onChange={(e) => setName(e.target.value)} />
+            <Form.Control id='text-input' type="text" placeholder="Enter product name" value={name} onChange={(e) => setName(e.target.value)} />
         </Form.Group>
 
         <Form.Group controlId="formProductPrice">
             <Form.Label>Product Price</Form.Label>
-            <Form.Control type="number" placeholder="Enter product price" value={price} onChange={(e) => setPrice(e.target.value)} />
+            <Form.Control id='text-input' type="number" placeholder="Enter product price" value={price} onChange={(e) => setPrice(e.target.value)} />
         </Form.Group>
 
         <Button variant="warning" type="submit">

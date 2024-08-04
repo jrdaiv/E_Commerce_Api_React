@@ -3,6 +3,7 @@ import React, {useEffect, useState} from 'react';
 import {Table, Button} from 'react-bootstrap'
 import {getProducts} from '../Services/Api/'
 import 'bootstrap/dist/css/bootstrap.min.css';
+import '../Styles/Styles.css'
 
 
 const ProductList = () => {
@@ -43,9 +44,9 @@ const ProductList = () => {
         }
 
         return(
-            <Table striped bordered hover>
+            <Table striped bordered hover >
                 <thead>
-                    <h2>Products</h2>
+                    <h2 className='text-white'>Products</h2>
                     <tr>
                         <th>ID</th>
                         <th>Name</th>
@@ -59,7 +60,7 @@ const ProductList = () => {
                             <td>{index + 1}</td>
                             <td>{product.name}</td>
                             <td>${product.price}</td>
-                            <Button variant="danger" onClick={() => handleDelete(product.id)} disabled={loading}>Delete</Button>
+                            <Button variant="danger" className='btn' onClick={() => handleDelete(product.id)} disabled={loading}>Delete</Button>
                         </tr>
                     ))}
                 </tbody>

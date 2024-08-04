@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {useParams} from 'react-router-dom'
+import {Table, Button} from 'react-bootstrap';
 import {getCustomer, deleteCustomer} from '../Services/Api/'
 
 
@@ -30,10 +31,9 @@ const CustomerDetails = () => {
     const handleDelete = async () => {
         setLoading(true);
         try{
-            const response = await deleteCustomer(id);
-            console.log('API response:', response);
+            await deleteCustomer(id);
             alert('Customer deleted successfully');
-            // history.push('/customers');
+            
         }catch(error){
             setError(error.message);
         }finally{

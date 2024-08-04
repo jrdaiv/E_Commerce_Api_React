@@ -38,7 +38,7 @@ const CustomerUpdateForm = () => {
             await updateCustomer(id, {name, email, phone});
             alert('Customer updated successfully');
         }catch(error){
-            alert('Error updating customer:', error);
+            alert(error.message);
         };
     };
 
@@ -47,22 +47,23 @@ const CustomerUpdateForm = () => {
 
     return (
       <Form onSubmit={handleSubmit}>
+        <h2 className='text-white'>Update Customer</h2>
         <Form.Group controlId="formCustomerName">
           <Form.Label>Customer Name</Form.Label>
-          <Form.Control type="text" placeholder="Enter customer name" value={name} onChange={(e) => setName(e.target.value)} />
+          <Form.Control id='text-input' type="text" placeholder="Enter customer name" value={name} onChange={(e) => setName(e.target.value)} />
         </Form.Group>
 
         <Form.Group controlId="formCustomerEmail">
           <Form.Label>Customer Email</Form.Label>
-          <Form.Control type="email" placeholder="Enter customer email" value={email} onChange={(e) => setEmail(e.target.value)} />
+          <Form.Control id='text-input' type="email" placeholder="Enter customer email" value={email} onChange={(e) => setEmail(e.target.value)} />
         </Form.Group>
 
         <Form.Group controlId="formCustomerPhone">
           <Form.Label>Customer Phone</Form.Label>
-          <Form.Control type="text" placeholder="Enter customer phone" value={phone} onChange={(e) => setPhone(e.target.value)} />
+          <Form.Control id='text-input' type="text" placeholder="Enter customer phone" value={phone} onChange={(e) => setPhone(e.target.value)} />
         </Form.Group>
 
-        <Button variant="primary" type="submit">
+        <Button variant="warning" type="submit">
           Update Customer
         </Button>
       </Form>

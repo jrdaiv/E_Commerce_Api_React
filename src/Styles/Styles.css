@@ -20,13 +20,36 @@
     margin: 10px;
 }
 
-/* html{
-    background: black;
-} */
+#root{
+    background-image: url(../assets/pexels-eberhardgross-1421903.jpg);
+    background-size: cover;
+}
+html{
+    background-image: url(../assets/pexels-eberhardgross-1421903.jpg);
+    background-size: cover;
+
+}
 
 .Customers{
     background-color: black;
 }
+
+/* Form{
+    background: wheat
+} */
+
+#text-input{
+    background: wheat;
+}
+
+
+
+
+
+
+
+
+
 
 
 

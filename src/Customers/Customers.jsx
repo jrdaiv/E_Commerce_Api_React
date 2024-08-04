@@ -9,7 +9,7 @@ import '../Styles/Styles.css'
 
 const Customers = () => {
   return (
-    <Container className=''>
+    <Container className='cust-form'>
       <Row>
         <Col className='cust'><CustomerForm /></Col>
       </Row>

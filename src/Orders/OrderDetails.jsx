@@ -13,7 +13,11 @@ const OrderDetails = () => {
         const fetchOrder = async () => {
             try{
                 const response = await getOrder(id);
-                console.log(response);
+                const formattedOrder = {
+                    id: response.id,
+                    name: response.name,
+                    price: response.price,
+                }
                 setOrder(response);
             }catch(error){
                 setError(error.message);
@@ -38,7 +42,7 @@ const OrderDetails = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {order.map((product) => (
+                    {order.items?.map((product) => (
                         <tr key={order.id}>
                             <td>{order.name}</td>
                             <td>${order.price}</td>

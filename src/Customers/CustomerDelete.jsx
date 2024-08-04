@@ -10,7 +10,7 @@ const CustomerDelete = () => {
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
     const [error, setError] = useState(null);
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const fetchCustomer = async () => {
@@ -32,7 +32,7 @@ const CustomerDelete = () => {
 
 
     const handleDelete = async (e) => {
-        e.preventDefault();
+        // e.preventDefault();
         setLoading(true)
         try {
             await deleteCustomer(id);
@@ -50,7 +50,7 @@ const CustomerDelete = () => {
 
     return (
         <div>
-            <h1>Customers Details</h1>
+            <h1 className='text-white'>Customers Details</h1>
             <Table striped bordered hover>
                 <thead>
                     <tr>
@@ -65,7 +65,7 @@ const CustomerDelete = () => {
                         <td>{name}</td>
                         <td>{email}</td>
                         <td>{phone}</td>
-                        <Button variant="danger" onClick={handleDelete} disabled={loading}>Delete</Button>
+                        <td><Button variant="danger" onClick={handleDelete} disabled={loading}>Delete</Button></td>
                     </tr>
                 </tbody>
             </Table>

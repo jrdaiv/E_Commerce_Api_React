@@ -10,7 +10,7 @@ import './Styles/Styles.css'
 const App = () => {
   return (
     <Router>
-      <Navbar bg="dark" variant="dark" expand="lg">
+      <Navbar bg="transparent" variant="dark" expand="sm">
       <Container>
           <Navbar.Brand href="/customers">E-Commerce API</Navbar.Brand>
           <Nav className="mr-auto">

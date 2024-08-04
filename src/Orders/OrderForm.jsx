@@ -46,6 +46,7 @@ const OrderForm = () => {
     return (
       <>
         {error && <p>{error}</p>}
+        <h2 className='text-white'>Create Order</h2>
         <Form onSubmit={handleSubmit}>
           <Form.Group controlId="customerId">
             <Form.Label>Customer</Form.Label>
@@ -53,6 +54,7 @@ const OrderForm = () => {
               as="select"
               value={customerId}
               onChange={(e) => setCustomerId(e.target.value)}
+              id='text-input'
             >
               <option value="">Select a customer</option>
               {customers.map((customer) => (
@@ -69,8 +71,9 @@ const OrderForm = () => {
               as="select"
               value={productId}
               onChange={(e) => setProductId(e.target.value)}
+              id='text-input'
             >
-              <option value="">Select a product</option>
+              <option  value="">Select a product</option>
               {products.map((product) => (
                 <option key={product.id} value={product.id}>
                   {product.name}
@@ -85,6 +88,7 @@ const OrderForm = () => {
               type="date"
               value={orderDate}
               onChange={(e) => setOrderDate(e.target.value)}
+              id='text-input'
             />
           </Form.Group>
 
