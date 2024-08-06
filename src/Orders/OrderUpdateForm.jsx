@@ -1,82 +1,67 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Form, Button } from 'react-bootstrap';
-import { getOrder, updateOrder } from '../Services/Api';
+import { getCustomer, updateCustomer } from '../Services/Api';
 
-const OrderUpdateForm = () => {
-  const { id } = useParams();
-  const [order, setOrder] = useState(null);
-  const [product, setProduct] = useState('');
-  const [price, setPrice] = useState('');
-  const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(true);
+const CustomerUpdateForm = () => {
+    const { id } = useParams();
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [phone, setPhone] = useState('');
+    const [error, setError] = useState(null);
+    const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const fetchOrder = async () => {
-      try {
-        const response = await getOrder(id);
-        setOrder(response);
-        setProduct(response.product);
-        setPrice(response.price);
-      } catch (error) {
-        setError(error.message);
-      } finally {
-        setLoading(false);
-      }
+    useEffect(() => {
+        const fetchCustomer = async () => {
+            try {
+                const response = await getCustomer(id);
+                const { name, email, phone } = response;
+                setName(name);
+                setEmail(email);
+                setPhone(phone);
+            } catch (error) {
+                setError(error.message);
+            } finally {
+                setLoading(false);
+            }
+        }
+        fetchCustomer();
+    }, [id]);
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const customerData = { name, email, phone };
+        try {
+            await updateCustomer(id, customerData);
+            alert('Customer updated successfully');
+        } catch (error) {
+            alert(error.message);
+        }
     };
-    fetchOrder();
-  }, [id]);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    try {
-      await updateOrder(id, { product, price });
-      alert('Order updated successfully');
-    } catch (error) {
-      setError(error.message);
-    } finally {
-      setLoading(false);
-    }
-  };
+    if (loading) return <p>Loading...</p>;
+    if (error) return <p>Error: {error}</p>;
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error}</p>;
+    return (
+        <Form onSubmit={handleSubmit}>
+            <h2 className='text-white'>Update Customer</h2>
+            <Form.Group>
+                <Form.Label>Customer Name</Form.Label>
+                <Form.Control type="text" placeholder="Enter customer name" value={name} onChange={(e) => setName(e.target.value)} />
+            </Form.Group>
+            <Form.Group>
+                <Form.Label>Customer Email</Form.Label>
+                <Form.Control type="email" placeholder="Enter customer email" value={email} onChange={(e) => setEmail(e.target.value)} />
+            </Form.Group>
+            <Form.Group>
+                <Form.Label>Customer Phone</Form.Label>
+                <Form.Control type="text" placeholder="Enter customer phone" value={phone} onChange={(e) => setPhone(e.target.value)} />
+            </Form.Group>
+            <Button variant="warning" type="submit">
+                Update Customer
+            </Button>
+        </Form>
+    );
+}
 
-  return (
-    <div>
-      <h2 className='text-white'>Update Order</h2>
-      {order && (
-        <div>
-          <p>ID: {order.id}</p>
-          <p>Date: {order.date}</p>
-        </div>
-      )}
-      <Form onSubmit={handleSubmit}>
-        <Form.Group controlId="product">
-          <Form.Label>Product</Form.Label>
-          <Form.Control
-            id='text-input'
-            type="text"
-            value={product}
-            placeholder='Type Product'
-            onChange={(e) => setProduct(e.target.value)}
-          />
-        </Form.Group>
-        <Form.Group controlId="price">
-          <Form.Label>Price</Form.Label>
-          <Form.Control
-            id='text-input'
-            type="number"
-            value={price}
-            placeholder='Enter price'
-            onChange={(e) => setPrice(e.target.value)}
-          />
-        </Form.Group>
-        <Button variant="warning" type="submit">Update Order</Button>
-      </Form>
-    </div>
-  );
-};
-
-export default OrderUpdateForm;
+export default CustomerUpdateForm;

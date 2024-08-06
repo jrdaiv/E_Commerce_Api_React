@@ -28,47 +28,34 @@ const CustomerDetails = () => {
 
 
 
-    const handleDelete = async () => {
-        setLoading(true);
-        try{
-            await deleteCustomer(id);
-            alert('Customer deleted successfully');
+    // const handleDelete = async () => {
+    //     setLoading(true);
+    //     try{
+    //         await deleteCustomer(id);
+    //         alert('Customer deleted successfully');
             
-        }catch(error){
-            setError(error.message);
-        }finally{
-            setLoading(false);
+    //     }catch(error){
+    //         setError(error.message);
+    //     }finally{
+    //         setLoading(false);
 
-        }
-    };
+    //     }
+    // };
 
     if(loading) return <p>Loading...</p>;
     if(error) return <p>Error: {error}</p>;
 
-
     return (
-        <>
-        <Table striped bordered hover>
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Phone</th>
-                    <th>Delete</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>{customer.name}</td>
-                    <td>{customer.email}</td>
-                    <td>{customer.phone}</td>
-                    <td><Button variant="danger" onClick={() => handleDelete(customer.id)} disabled={loading}>Delete</Button></td>
-                </tr>
-            </tbody>
-        </Table>
-        </>
+        <div>
+            <h1>{customer.name}</h1>
+            <p>Email: {customer.email}</p>
+            <p>Phone: {customer.phone}</p>
+        </div>
     );
 };
+
+
+    
 export default CustomerDetails;
 
 

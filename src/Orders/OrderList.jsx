@@ -1,6 +1,6 @@
 import React, { useState, useEffect} from 'react'
 import { Container, Table, Button } from 'react-bootstrap';
-import {getOrders, getCustomer, deleteOrder} from '../Services/Api/'
+import {getOrders, getCustomer} from '../Services/Api/'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../Styles/Styles.css'
 

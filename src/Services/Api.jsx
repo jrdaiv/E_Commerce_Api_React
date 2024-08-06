@@ -15,6 +15,8 @@ export const getCustomer = (id) => api.get(`/customers/${id}`).then(handleRespon
 export const updateCustomer = (id, customer) => api.put(`/customers/${id}`, customer).then(handleResponse).catch(handleError);
 export const deleteCustomer = (id) => api.delete(`/customers/${id}`).then(handleResponse).catch(handleError);
 export const getCustomers = () => api.get('/customers').then(handleResponse).catch(handleError);
+export const getCustomerOrders = (id) => api.get(`/customers/${id}/orders`).then(handleResponse).catch(handleError);
+export const getCustomerOrderStatus = (id) => api.get(`/customers/${id}/orders/status`).then(handleResponse).catch(handleError);
 
 // Product APIs
 export const createProduct = (product) => api.post('/products', product).then(handleResponse).catch(handleError);
@@ -31,4 +33,5 @@ export const getOrdersByCustomer = (customerId) => api.get(`/customers/${custome
 export const cancelOrder = (id) => api.delete(`/orders/${id}`).then(handleResponse).catch(handleError);
 export const getOrders = () => api.get('/orders').then(handleResponse).catch(handleError);
 export const updateOrder = (id, order) => api.put(`/orders/${id}`, order).then(handleResponse).catch(handleError);
+
 export default api;

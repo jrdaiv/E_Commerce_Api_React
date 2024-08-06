@@ -22,7 +22,7 @@ const Orders = () => {
         {/* <Col className='cust'><OrderDetails /></Col> */}
       </Row>
       <Row>
-        <Col className='cust'><OrderList /></Col>
+        {/* <Col className='cust'><OrderList /></Col> */}
       </Row>
 
 

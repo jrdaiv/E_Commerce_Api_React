@@ -1,6 +1,5 @@
 import React from 'react';
 import CustomerForm from './CustomerForm';
-import CustomerDetails from './CustomerDetails';
 import CustomerUpdateForm from './CustomerUpdateForm';
 import CustomerDelete from './CustomerDelete';
 import { Container, Row, Col } from 'react-bootstrap';
