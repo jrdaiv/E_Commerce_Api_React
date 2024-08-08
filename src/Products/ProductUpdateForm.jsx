@@ -1,13 +1,12 @@
 import React, {useState, useEffect} from 'react';
 import {Form, Button} from 'react-bootstrap';
-import {useParams} from 'react-router-dom';
 import {getProduct, updateProduct} from '../Services/Api';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 
 const ProductUpdateForm = () => {
-    const {id} = useParams();
+    const [id, setId] = useState('');
     const [name, setName] = useState('');
     const [price, setPrice] = useState('');
     const [error, setError] = useState(null);
@@ -30,6 +29,7 @@ const ProductUpdateForm = () => {
 
     if(loading) return <p>Loading...</p>;
     if(error) return <p>Error: {error}</p>;
+    // if(!name) return <p>Product not found</p>;
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -43,7 +43,11 @@ const ProductUpdateForm = () => {
 
   return (
     <Form onSubmit={handleSubmit}>
-        <h2 className='text-white'>Update Customers</h2>
+        <h2 className='text-white'>Update Products</h2>
+        <Form.Group controlId="formProductName">
+            <Form.Label>Product ID</Form.Label>
+            <Form.Control id='text-input' type="text" placeholder="Enter product ID" value={id} onChange={(e) => setId(e.target.value)} />
+        </Form.Group>
         <Form.Group controlId="formProductName">
             <Form.Label>Product Name</Form.Label>
             <Form.Control id='text-input' type="text" placeholder="Enter product name" value={name} onChange={(e) => setName(e.target.value)} />

@@ -1,6 +1,6 @@
 import React, { useState, useEffect} from 'react'
 import { Container, Table, Button } from 'react-bootstrap';
-import {getOrders, getCustomer} from '../Services/Api/'
+import {getOrders, getCustomer, getCustomers} from '../Services/Api/'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../Styles/Styles.css'
 
@@ -13,36 +13,51 @@ const OrderList = () => {
 
     useEffect(() => {
         const fetchOrders = async () => {
-            try{
+            try {
                 const response = await getOrders();
                 setOrders(response);
-
+                console.log(response)
                 const customerData = {};
                 for (const order of response) {
                     const customerResponse = await getCustomer(order.customerId);
                     customerData[order.customerId] = customerResponse;
                 }
                 setCustomers(customerData);
-            }catch(error){
+            } catch (error) {
                 setError(error.message);
-            }finally{
+            } finally {
                 setLoading(false);
             }
-        }
+        };
         fetchOrders();
-    }, [])
-    
-      const handleDelete = async (id) => {
-        setLoading(true);
-        try {
-          await deleteOrder(id);
-          setOrders(orders.filter((order) => order.id !== id));
-        } catch (error) {
-          setError(error.message);
-        } finally {
-          setLoading(false);
+        // setLoading(false);
+    }, []);
+
+    useEffect(() => {
+        const fetchCustomers = async () => {
+            try {
+                const response = await getCustomers();
+                setCustomers(response);
+                console.log(response)
+            }catch(error){
+                setError(error.message);
+
+            }
         }
-      };
+        fetchCustomers();
+        setLoading(false);
+    }, []);
+
+    const handleDelete = async (id) => {
+        if (id) {
+            try {
+                await deleteOrder(id);
+                setOrders(orders.filter(order => order.id !== id));
+            } catch (error) {
+                setError(error.message);
+            }
+        }
+    };
 
 
 
@@ -61,21 +76,20 @@ const OrderList = () => {
                 <tr >
                     <th>ID</th>
                     <th>Customer</th>
-                    <th>Name</th>
-                    <th>Price</th>
+                    <th>Product</th>
                     <th>Delete</th>
                 </tr>
             </thead>
             <tbody >
-                {orders.map((order) => (
-                    <tr key={order.id}>
-                        <td>{order.id}</td>
-                        <td>{customers(order.customerId)?.name || 'Unknown'}</td>
-                        <td>{order.name}</td>
-                        <td>{order.price}</td>
-                        <Button variant="danger" onClick={() => handleDelete(order.id)} disabled={loading}>
+                {orders.map((order, index) => (
+                    <tr key={order.customer_Id}>
+                        <td>{order.order_id}</td>
+                        <td> {customers[order.customerId]}</td>
+                        <td>{order.product}</td>
+                        {/* <td>{order.price}</td> */}
+                        <td><Button variant="danger" onClick={() => handleDelete(order.id)} disabled={loading}>
                             Delete
-                        </Button>
+                        </Button></td>
                     </tr>
                 ))}
             </tbody>

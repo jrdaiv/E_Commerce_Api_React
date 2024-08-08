@@ -27,7 +27,7 @@ const OrderForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
+    // setLoading(true);
     try {
       await createOrder({ customerId, productId, orderDate });
       alert("Order created successfully");

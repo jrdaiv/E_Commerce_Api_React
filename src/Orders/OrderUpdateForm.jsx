@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
 import { Form, Button } from 'react-bootstrap';
 import { getCustomer, updateCustomer } from '../Services/Api';
 
 const CustomerUpdateForm = () => {
-    const { id } = useParams();
+    const [id, setId] = useState('');
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
@@ -14,7 +13,7 @@ const CustomerUpdateForm = () => {
     useEffect(() => {
         const fetchCustomer = async () => {
             try {
-                const response = await getCustomer(id);
+                const response = await getCustomer();
                 const { name, email, phone } = response;
                 setName(name);
                 setEmail(email);
@@ -26,7 +25,9 @@ const CustomerUpdateForm = () => {
             }
         }
         fetchCustomer();
-    }, [id]);
+    }, []);
+
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -44,7 +45,11 @@ const CustomerUpdateForm = () => {
 
     return (
         <Form onSubmit={handleSubmit}>
-            <h2 className='text-white'>Update Customer</h2>
+            <h2 className='text-white'>Update Orders</h2>
+            <Form.Group>
+                <Form.Label>Customer Id</Form.Label>
+                <Form.Control type="text" placeholder="Enter customer Id" value={id} onChange={(e) => setId(e.target.value)} />
+            </Form.Group>
             <Form.Group>
                 <Form.Label>Customer Name</Form.Label>
                 <Form.Control type="text" placeholder="Enter customer name" value={name} onChange={(e) => setName(e.target.value)} />

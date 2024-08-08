@@ -6,7 +6,7 @@ import '../Styles/Styles.css'
 
 
 const CustomerUpdateForm = () => {
-    const {id} = useParams();
+    const [id, setId] = useState('');
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
@@ -14,63 +14,70 @@ const CustomerUpdateForm = () => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        const fetchCustomer = async () => {
-            try{
-                const response = await getCustomer(id);
-                const {name, email, phone} = response;
-                setName(name);
-                setEmail(email);
-                setPhone(phone);
-            }catch(error){
-                setError(error.message);
-            }finally{
-                setLoading(false);
-            }
-        }
-        fetchCustomer();
-    }, [id]);
+        setLoading(false)
+    }, []);
 
-
-
+    // const getCustomerInfo = async () => {
+    //     if (id) {
+    //       try{
+    //         const response = await getCustomer(id);
+    //         const {name, email, phone} = response;
+    //         setId(id);
+    //         setName(name);
+    //         setEmail(email);
+    //         setPhone(phone);
+    //     }catch(error){
+    //         setError(error.message);
+    //     }finally{
+    //         setLoading(false);
+    //     }
+    //   }
+    // }
+          
     const handleSubmit = async (e) => {
       e.preventDefault();
       const customerData = {name, email, phone};
       console.log(customerData);
       try{
           await updateCustomer(id, customerData);
-          alert('Customer updated successfully');
+           alert('Customer updated successfully');
       }catch(error){
           alert(error.message);
       };
-  };
-  
+    }
+                    
+  return (
+    <>
+    <Form onSubmit={handleSubmit}>
+      <h2 className='text-white'>Update Customers</h2>
+      
+      <Form.Group>
+        <Form.Label>Customer ID</Form.Label>
+        <Form.Control type="text" placeholder="Enter customer Id" value={id} onChange={(e) => setId(e.target.value)} />
+      </Form.Group>
+      <Form.Group>
+      <Form.Label>Customer Name</Form.Label>
+      <Form.Control type="text" placeholder="Enter customer name" value={name} onChange={(e) => setName(e.target.value)} />
+      </Form.Group>
 
-    if(loading) return <p>Loading...</p>;
-    if(error) return <p>Error: {error}</p>;
+      <Form.Group> 
+        <Form.Label>Customer Email</Form.Label>
+        <Form.Control type="email" placeholder="Enter customer email" value={email} onChange={(e) => setEmail(e.target.value)} />
+      </Form.Group>
 
-    return (
-      <Form onSubmit={handleSubmit}>
-        <h2 className='text-white'>Update Customer</h2>
-        <Form.Group>
-        <Form.Label>Customer Name</Form.Label>
-        <Form.Control type="text" placeholder="Enter customer name" value={name} onChange={(e) => setName(e.target.value)} />
-        </Form.Group>
+      <Form.Group>
+        <Form.Label>Customer Phone</Form.Label>
+        <Form.Control type="text" placeholder="Enter customer phone" value={phone} onChange={(e) => setPhone(e.target.value)} />
+      </Form.Group>
 
-        <Form.Group> 
-          <Form.Label>Customer Email</Form.Label>
-          <Form.Control type="email" placeholder="Enter customer email" value={email} onChange={(e) => setEmail(e.target.value)} />
-        </Form.Group>
+      <Button variant="warning" type="submit">
+        Update Customer
+      </Button>
+    </Form>
+    </>
 
-        <Form.Group>
-          <Form.Label>Customer Phone</Form.Label>
-          <Form.Control type="text" placeholder="Enter customer phone" value={phone} onChange={(e) => setPhone(e.target.value)} />
-        </Form.Group>
 
-        <Button variant="warning" type="submit">
-          Update Customer
-        </Button>
-      </Form>
-    );
+  )
 
 }
 

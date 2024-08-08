@@ -44,13 +44,16 @@ const CustomerDelete = () => {
         fetchCustomers();
     }, [])
 
-    const handleDelete = async () => {
+    const handleDelete = async (id) => {
+        console.log(id)
         if (id) {
             setLoading(true);
             try {
                 await deleteCustomer(id);
+                const customers = await getCustomers();
                 alert('Customer deleted successfully');
-                setCustomer(null);
+                // setCustomer(null);
+                setCustomers(customers);
             } catch (error) {
                 setError(error.message);
             } finally {
@@ -63,7 +66,7 @@ const CustomerDelete = () => {
 
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error: {error}</p>;
-    if (!customer) return <p>Customer not found</p>;
+    // if (!customer) return <p>Customer not found</p>;
 
     return (
         <div>
@@ -83,7 +86,7 @@ const CustomerDelete = () => {
                         <td>{customer.name}</td>
                         <td>{customer.email}</td>
                         <td>{customer.phone}</td>
-                        <td><Button variant="danger" onClick={handleDelete} disabled={loading}>Delete</Button></td>
+                        <td><Button variant="danger" onClick={() => handleDelete(customer.customer_id)} disabled={loading}>Delete</Button></td>
                     </tr>
                     ))}
                 </tbody>
