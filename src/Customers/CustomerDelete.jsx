@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import { deleteCustomer, getCustomers, getCustomer } from '../Services/Api';
 
 const CustomerDelete = () => {
-    const { id } = useParams(); // Make sure 'id' is retrieved correctly
+    const [id, setId] = useState(useParams().id); // Make sure 'id' is retrieved correctly
     const [customer, setCustomer] = useState({});
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -71,7 +71,7 @@ const CustomerDelete = () => {
     return (
         <div>
             <h1 className='text-white'>Customer Details</h1>
-            <Table striped bordered hover>
+            <Table striped bordered hover variant='dark'>
                 <thead>
                     <tr>
                         <th>Name</th>

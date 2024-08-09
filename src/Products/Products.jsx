@@ -17,13 +17,7 @@ const Products = () => {
         <Col className='cust'><ProductForm /></Col>
       </Row>
       <Row>
-        {/* <Col className='cust'><ProductDetails /></Col> */}
-      </Row>
-      <Row>
         <Col className='cust'><ProductUpdateForm /></Col>
-      </Row>
-      <Row>
-        {/* <Col className='cust'><ProductDelete /></Col> */}
       </Row>
       <Row>
         <Col className='cust'><ProductList /></Col>

@@ -29,8 +29,10 @@ const ProductDelete = () => {
 
 
     const handleDelete = async () => {
+      console.log(id)
         setLoading(true);
         try {
+          console.log(id)
             await deleteProduct(id);
             setProducts(products.filter(product => product.id !== id));
             alert('Product deleted successfully');

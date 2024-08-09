@@ -29,19 +29,19 @@ const CustomerForm = () => {
                 {error && <p>{error.message}</p>}
                 <h2 className='text-white'>Create Customer</h2>
                 <Form onSubmit={handleSubmit}>
-                    <Form.Group>
+                    <Form.Group >
                         <Form.Label>Name</Form.Label>
-                        <Form.Control id='text-input' type="text" placeholder="Enter name"
+                        <Form.Control className='form-con' id='text-input' type="text" placeholder="Enter name"
                             value={name} onChange={(e) => setName(e.target.value)} />
                     </Form.Group>
                     <Form.Group>
                         <Form.Label>Email</Form.Label>
-                        <Form.Control id='text-input' type="email" placeholder="Enter email"
+                        <Form.Control className='form-con' id='text-input' type="email" placeholder="Enter email"
                             value={email} onChange={(e) => setEmail(e.target.value)} />
                     </Form.Group>
                     <Form.Group >
                         <Form.Label>Phone</Form.Label>
-                        <Form.Control id='text-input' type="text" placeholder="Enter phone"
+                        <Form.Control className='form-con' id='text-input' type="text" placeholder="Enter phone"
                             value={phone} onChange={(e) => setPhone(e.target.value)} />
                     </Form.Group>
                     <Button variant="warning" type="submit">

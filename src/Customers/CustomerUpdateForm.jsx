@@ -53,21 +53,22 @@ const CustomerUpdateForm = () => {
       
       <Form.Group>
         <Form.Label>Customer ID</Form.Label>
-        <Form.Control type="text" placeholder="Enter customer Id" value={id} onChange={(e) => setId(e.target.value)} />
+        <Form.Control id="form-con" className='text-input' type="text" placeholder="Enter customer Id" value={id} onChange={(e) => setId(e.target.value)} />
       </Form.Group>
+      
       <Form.Group>
       <Form.Label>Customer Name</Form.Label>
-      <Form.Control type="text" placeholder="Enter customer name" value={name} onChange={(e) => setName(e.target.value)} />
+      <Form.Control id="form-con" className='text-input' type="text" placeholder="Enter customer name" value={name} onChange={(e) => setName(e.target.value)} />
       </Form.Group>
 
       <Form.Group> 
         <Form.Label>Customer Email</Form.Label>
-        <Form.Control type="email" placeholder="Enter customer email" value={email} onChange={(e) => setEmail(e.target.value)} />
+        <Form.Control id="form-con" className='text-input' type="email" placeholder="Enter customer email" value={email} onChange={(e) => setEmail(e.target.value)} />
       </Form.Group>
 
       <Form.Group>
         <Form.Label>Customer Phone</Form.Label>
-        <Form.Control type="text" placeholder="Enter customer phone" value={phone} onChange={(e) => setPhone(e.target.value)} />
+        <Form.Control id="form-con" className='text-input' type="text" placeholder="Enter customer phone" value={phone} onChange={(e) => setPhone(e.target.value)} />
       </Form.Group>
 
       <Button variant="warning" type="submit">

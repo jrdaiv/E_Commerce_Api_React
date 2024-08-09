@@ -24,7 +24,6 @@ export const getProduct = (id) => api.get(`/products/${id}`).then(handleResponse
 export const updateProduct = (id, product) => api.put(`/products/${id}`, product).then(handleResponse).catch(handleError);
 export const deleteProduct = (id) => api.delete(`/products/${id}`).then(handleResponse).catch(handleError);
 export const getProducts = () => api.get('/products').then(handleResponse).catch(handleError);
-
 // Order APIs
 export const createOrder = (order) => api.post('/orders', order).then(handleResponse).catch(handleError);
 export const getOrder = (id) => api.get(`/orders/${id}`).then(handleResponse).catch(handleError);

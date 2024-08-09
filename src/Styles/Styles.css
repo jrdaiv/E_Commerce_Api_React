@@ -38,20 +38,38 @@ html{
     background: wheat
 } */
 
-#text-input{
-    background: wheat;
+
+
+.text-input{
+    color: wheat;
 }
 
+.product-title{
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-top: 1rem;
+    margin-bottom: 1rem
+}
 
+.form-con{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
 
+#form-con{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
 
-
-
-
-
-
-
-
-
+/* .cust-table{
+    width: 30%;
+} */
 
 
