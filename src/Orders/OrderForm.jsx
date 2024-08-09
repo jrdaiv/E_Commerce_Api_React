@@ -11,6 +11,7 @@ const OrderForm = () => {
   const [orderDate, setOrderDate] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  
 
   useEffect(() => {
     const fetchCustomersAndProducts = async () => {
@@ -30,7 +31,8 @@ const OrderForm = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      await createOrder({customerId, orderDate, selectedProducts  });
+      const order = {customer_id: parseInt(customerId), date: orderDate, products: [parseInt(selectedProducts)]}
+      await createOrder(order);
       alert("Order created successfully");
       setCustomerId("");
       setSelectedProducts("");
@@ -40,7 +42,7 @@ const OrderForm = () => {
     } finally {
       setLoading(false);
     }
-    console.log(customerId, selectedProducts, orderDate)
+    console.log({customerId, orderDate, products: [selectedProducts]})
   };
 
   return(
@@ -52,7 +54,7 @@ const OrderForm = () => {
         
         <option value="">Select Customer</option>
         {customers.map((customer) => (
-          <option key={customer.id} value={customer.id}>
+          <option key={customer.customer_id} value={customer.customer_id}>
             {customer.name}
           </option>
         ))}
@@ -61,7 +63,7 @@ const OrderForm = () => {
       <FormControl className='form-con' as="select" value={selectedProducts} onChange={(e) => setSelectedProducts(e.target.value)}>
         <option value="">Select Products</option>
         {products.map((product) => (
-          <option key={product.id} value={product.id}>
+          <option key={product.product_id} value={product.product_id}>
             {product.name}
           </option>
         ))}

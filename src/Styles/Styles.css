@@ -11,6 +11,9 @@
     border-radius: 15px;
     border-width: 5px;
 }
+.cust-table{
+    width: auto;
+}
 /* .cust-details{
     display: flex;
 } */

@@ -54,16 +54,15 @@ const OrderList = () => {
 
 
   return (
-    <Container className='cust-container'>
+    <div>
         <h2 className='text-white'>Order list</h2>
-        <Container className='d-flex justify-content-center'>
         <Table striped bordered hover variant='dark' className='cust-table'>
             <thead>
                 <tr>
                     <th>Order ID</th>
                     <th>Customer ID</th>
                     <th>Order Date</th>
-                    <th># of Products</th>
+                    {/* <th># of Products</th> */}
                     <th>Order Details</th>
                     <th>Delete</th>
 
@@ -75,9 +74,8 @@ const OrderList = () => {
                         <td>{order.order_id}</td>
                         <td>{order.customer_id}</td>
                         <td>{order.date}</td>
-                        <td>{order.products.length}</td>
+                        {/* <td>{order.products.length}</td> */}
                         <td>{JSON.stringify(order.products)}</td>
-
                         <td>
                             <Button variant='danger' onClick={() => handleDelete(order.order_id)}>Delete</Button>
                         </td>
@@ -85,8 +83,10 @@ const OrderList = () => {
                 ))}
             </tbody>
         </Table>
-        </Container>
-    </Container>
+
+
+    </div>
+
   )
 }
 
