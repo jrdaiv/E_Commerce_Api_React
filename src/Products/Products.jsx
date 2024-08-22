@@ -22,6 +22,12 @@ const Products = () => {
       <Row>
         <Col className='cust'><ProductList /></Col>
       </Row>
+      <Row>
+        <Col className='cust'><ProductDetails /></Col>
+      </Row>
+      <Row>
+        <Col className='cust'><ProductDelete /></Col>
+      </Row>
     </Container>
   );
 };
